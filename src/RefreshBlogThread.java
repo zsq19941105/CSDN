@@ -8,15 +8,16 @@ import org.apache.commons.httpclient.methods.GetMethod;
  * @author QIQI 2017年3月19日 17:45:25
  *
  */
-public class RefreshBlogThread implements Runnable {
+public class RefreshBlogThread implements Runnable{
 
 	private int number = 0; 
+	
 	
 	private String blogArticleUrl;
 	
 	public RefreshBlogThread(String blogArticleUrl) {
 		// TODO 自动生成的构造函数存根
-		this.blogArticleUrl = blogArticleUrl;
+		this.blogArticleUrl = blogArticleUrl;		
 	}
 	
 	@Override
@@ -39,7 +40,7 @@ public class RefreshBlogThread implements Runnable {
                 if (statusCode != HttpStatus.SC_OK) {    
                     System.out.print("失败：" + getMethod.getStatusLine());    
                 }else{
-                	System.out.println(blogArticleUrl+"已经刷新了:"+number++); 
+                	System.out.println(blogArticleUrl+"已经刷新了:"+ ++number+"次"); 
                 }                  
                 Thread.sleep(1000);
             } catch (Exception e) {    

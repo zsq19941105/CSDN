@@ -3,10 +3,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.methods.GetMethod;
 
 /**
  * 
@@ -27,10 +23,11 @@ public class CSDN {
 			e.printStackTrace();
 		}
 		
-		if (csdnArticle != null) {
+		ExecutorService es = null;
+		if (articleUrls != null) {
 			int count = articleUrls.size();
 			//用一个线程池
-			ExecutorService es = Executors.newFixedThreadPool(count);
+			es = Executors.newFixedThreadPool(count);
 			
 			for (int i = 0; i < count; i++) {
 				RefreshBlogThread refreshBlogThread = new RefreshBlogThread(articleUrls.get(i));
@@ -39,7 +36,8 @@ public class CSDN {
 		}else{
 			System.out.println("该博客没有文章！");
 		}
-		
+				
+		es.shutdown();
 	}
 	
 }
